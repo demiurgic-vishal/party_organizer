@@ -168,9 +168,9 @@ class DemoController < ApplicationController
       
     end
     def index
-        #access_token_hash = MiniFB.oauth_access_token('199535680199935', "http://protected-hollows-6010.herokuapp.com/demo/index",  '9924d075c17752a89d0e19a0b9439ea9', params[:code])
-        #$access_token = access_token_hash["access_token"]
-        $access_token = "CAACEdEose0cBAENWZBIgVifFSVuzFB0INKVuvmFffJ25KULaytpfxYGvQuzPYglxUscB0qm3XORZC3T7lTsgW6WuT5xP4C9ANiy9G3Lnoy659lJHTzhMB3ip8YlMSF7QEoCgUDUXhZCaQvw9eJ2JWIZB5RRvL6cZD"
+        access_token_hash = MiniFB.oauth_access_token('199535680199935', "http://calm-crag-3621.herokuapp.com",  '9924d075c17752a89d0e19a0b9439ea9', params[:code])
+        $access_token = access_token_hash["access_token"]
+        #$access_token = "CAACEdEose0cBAENWZBIgVifFSVuzFB0INKVuvmFffJ25KULaytpfxYGvQuzPYglxUscB0qm3XORZC3T7lTsgW6WuT5xP4C9ANiy9G3Lnoy659lJHTzhMB3ip8YlMSF7QEoCgUDUXhZCaQvw9eJ2JWIZB5RRvL6cZD"
         $graph=Koala::Facebook::API.new($access_token)
         $user=$graph.get_object("me")
         $party=Party.create(:party_admin=>$user["name"])
