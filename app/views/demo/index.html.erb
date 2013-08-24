@@ -1,0 +1,23 @@
+<h1>Demo#index</h1>
+
+<%= form_tag "/demo/mail" do %>
+	<%= text_field_tag 'email_id' %>
+  	<%= submit_tag "Send mail to non-facebook friendj" %>
+<% end %>
+
+<%= cookies[:party_id]%>
+<%= form_tag "/demo/main" do %>
+	<table width="450px">
+		<% for name in $name_list%>
+			<tr>
+ 		   	 	<td>
+					<%= check_box_tag "user_comming "+ name[0],name[0], false %>
+	 		 	   <%= image_tag($profile_pic_list[name[0]], :size => 36*25) %>
+ 				</td>
+ 		   	 	<td>
+			   	 	<%= name[1]%> 
+		  	  	</tr>
+		<%end%>
+	</table>
+  	<%= submit_tag "Save" %>
+<% end %>

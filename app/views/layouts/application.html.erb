@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PartyOrganiser</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript">
+  
+    function sort(id)
+    {
+  	//alert(id);
+  	function testAjax(some) 
+  	{
+    	//alert(some);
+    	thing={'id':some};
+    	$.ajax({
+      			url:"sort",
+      			method:'post',
+      			data: thing, 
+      			success:function(data) {
+         				//alert(JSON.stringify(data)); 
+      					}
+   			});
+	}
+	testAjax(id);
+	}
+  	
+  </script>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

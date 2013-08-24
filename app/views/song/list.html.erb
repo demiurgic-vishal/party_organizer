@@ -1,0 +1,119 @@
+<script type="text/javascript">
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+      var id = <%= @songs[0].id%>;
+      var party_id = <%= @songs[0].party_id %>; 
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '330',
+          width: '550',
+          videoId: '<%= @songs[0].youtube_id%>',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      // var done = false;
+       function onPlayerStateChange(event) {
+         if (event.data == YT.PlayerState.ENDED) {
+         	
+         	var a=player.getVideoUrl();
+         	var n=a.split("v="); 
+         	delete_song(n[1]);
+         	//alert(n[1]);
+         	//player.loadVideoById("bHQqvYy5KYo");
+         }
+       }
+       
+      function delete_song(youtube_id)
+      {
+      	video_id={'id':youtube_id, 'party_id':party_id}
+      	$.ajax({
+      			url:"delete",
+      			method:'get',
+      			data: video_id,
+      			success:function(data) {
+      				    //alert(JSON.stringify(data.youtube_id));   
+      				     //$('body').append();)); 
+      				       player.loadVideoById(data.youtube_id);
+                     id=data.id;
+                     $('.first').remove();
+                     $('.songs').prepend('<h1 class="first">' + data.title +' '+data.artist +' '+data.album+' '+String(data.votes)+'</h1>');
+      				     //$('body').append();
+         				//alert(data.length); 
+      					}
+   			});
+      } 
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+</script>
+<script type="text/javascript">
+    
+    function onYouTubePlayerReady(){
+    	alert("api ready");
+    }
+    
+    (function(){
+
+   
+
+
+   setInterval(function()
+   {
+   	
+   	$.ajax({
+      			url:"repeated_render",
+      			method:'get', 
+      			success:function(data) {
+      				     $('.delete').remove();
+      				     for(var i=0;i<data.length;i++)
+      				     {
+                    
+                    if(data[i].id!==id)
+      				      $('body').append('<h1 class="delete">' + data[i].title +' '+data[i].artist +' '+data[i].album+' '+String(data[i].votes)+'</h1><button class="delete" onclick="sort(\'' + data[i].id+'\')">vote</button>');	
+      				     }
+      				     //$('body').append();
+         				//alert(data.length); 
+      					}
+   			});
+   	
+   
+   
+   },500);
+	})();
+	
+</script>
+
+<div style="float:left;" id="player"></div>
+<div class="songs">
+<% @songs.each do |song| %>
+<% if @songs.first==song %>
+<h1 class="first"><%=  song.title+" "+song.artist+" "+song.album+" "+song.votes.to_s %></h1>
+<% else %>
+<h1 class="delete" ><%=  song.title+" "+song.artist+" "+song.album+" "+song.votes.to_s %></h1><button class="delete" onclick="sort('<%= song.id %>')">vote</button>
+
+<% end %>
+<%end%>
+</div>
+
+<!-- <iframe id="ytplayer" type="text/html" width="640" height="360" src="http://www.youtube.com/v/<%= @songs[0].youtube_id%>?version=3&enablejsapi=1" frameborder='0' allowfullscreen ></iframe> -->
