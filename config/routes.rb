@@ -4,6 +4,7 @@ PartyOrganiser::Application.routes.draw do
   get "demo/main"
   post "demo/main"
   get "demo/mail"
+  post "demo/mail"
   root 'demo#home'
   get 'song/home'
   get 'song/list'

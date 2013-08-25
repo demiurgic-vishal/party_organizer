@@ -170,13 +170,14 @@ class DemoController < ApplicationController
     def index
         #access_token_hash = MiniFB.oauth_access_token('204212613074016', "http://calm-crag-3621.herokuapp.com",  'b4653e6a3fecb75fc9909336f44b25a6', params[:code])
         #$access_token = access_token_hash["access_token"]
-        $access_token = "CAACEdEose0cBACQwq0dIPZBrfe4lhIoWNnpwmNvATd8ZBZACElmUJo92GWPwWaCUZAAalJ1wkHBdtQQoFKUDiZAJthGHjJH8abhkthPS8Ua7kaelOKBlPjwS0qu69ZC59eSHRwgfzYoaZB2S7fGeu1P1bdbN4tZBSKwZD"
+        $access_token = "CAACEdEose0cBABevdi0aZA4bDbG4JtbrxajZBNNZAeUX7PeOoOPROPNoFDeAzOSJTrvFCqF3ze0PRxaZA3AKFJ2PmtxMm2YOxXvugZA8pWW3ACivtXa8QjRplVX2GbLjrZB9pj4QXN9F0X0qxdwnGempE5ZBPVdU9wZD"
         $graph=Koala::Facebook::API.new($access_token)
         $user=$graph.get_object("me")
         $party=Party.create(:party_admin=>$user["name"])
         cookies[:party_id]=$party.id
         cookies[:user_email] = $user["username"]+"@sendgrid.me"
         @friends = $graph.get_connections($user["id"],"friends")
+        
         $name_list=Hash.new
         @id_list=[]
         for friend in @friends

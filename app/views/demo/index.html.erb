@@ -1,23 +1,35 @@
-<h1>Demo#index</h1>
+<div style="padding-top:5%;" class="container">
+	<div class="row">
+		<div style="float:left;" class="col-md-4 col-md-offset2">
+			<h1>Invite Your Friends</h1>
+		</div>
+	
+		<div class="col-md-4 col-md-offset-3">
+			<%= form_tag "/demo/mail" do %>
+			<%= text_field_tag 'email_id' %>
+			<button class="btn btn-primary" type="submit">Invite Non-FB friends</button>
+			<% end %>
+		</div>
+	</div>
 
-<%= form_tag "/demo/mail" do %>
-	<%= text_field_tag 'email_id' %>
-  	<%= submit_tag "Send mail to non-facebook friendj" %>
-<% end %>
 
-<%= cookies[:party_id]%>
-<%= form_tag "/demo/main" do %>
-	<table width="450px">
+	<%= form_tag "/demo/main" do %>
+	<div class="row">
 		<% for name in $name_list%>
-			<tr>
- 		   	 	<td>
+			<div style="float:left; margin-top:2%;" class="col-md-4">
+ 		   	 	
 					<%= check_box_tag "user_comming "+ name[0],name[0], false %>
 	 		 	   <%= image_tag($profile_pic_list[name[0]], :size => 36*25) %>
- 				</td>
- 		   	 	<td>
+ 				
+ 		   	 	
 			   	 	<%= name[1]%> 
-		  	  	</tr>
+		  	 </div> 	
 		<%end%>
-	</table>
-  	<%= submit_tag "Save" %>
+	</div>
+	<div style="margin-top:2%; padding-bottom:3%;" class="row">
+		<div class="col-md-4 col-md-offset3">
+			<button class="btn btn-lg btn-primary" type="submit">Invite !</button>
+		</div>
+	</div>
 <% end %>
+</div>

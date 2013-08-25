@@ -13,8 +13,8 @@
       var player;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-          height: '330',
-          width: '550',
+          height: '360',
+          width: '600',
           videoId: '<%= @songs[0].youtube_id%>',
           events: {
             'onReady': onPlayerReady,
@@ -56,7 +56,7 @@
       				       player.loadVideoById(data.youtube_id);
                      id=data.id;
                      $('.first').remove();
-                     $('.songs').prepend('<h1 class="first">' + data.title +' '+data.artist +' '+data.album+' '+String(data.votes)+'</h1>');
+                     $('.song').prepend('<h1 class="first">' + data.title +' '+data.artist +'</h1>');
       				     //$('body').append();
          				//alert(data.length); 
       					}
@@ -85,12 +85,12 @@
       			url:"repeated_render",
       			method:'get', 
       			success:function(data) {
-      				     $('.delete').remove();
+      				     $('.delete_body').remove();
       				     for(var i=0;i<data.length;i++)
       				     {
                     
                     if(data[i].id!==id)
-      				      $('body').append('<h1 class="delete">' + data[i].title +' '+data[i].artist +' '+data[i].album+' '+String(data[i].votes)+'</h1><button class="delete" onclick="sort(\'' + data[i].id+'\')">vote</button>');	
+      				     $('.songs').append('<div class="delete_body row"><div style="float:left;" class="col-md-5"><h4 class="delete">' + data[i].title +' '+data[i].artist +' '+data[i].album+' '+' </h4></div><div class="col-md-6"><button class="btn btn-primary btn-lg delete" onclick="sort(\'' + data[i].id +'\')">Vote <span class="glyphicon glyphicon-thumbs-up"></span></button><p style="padding-left:5%" class="delete">Votes: ' + data[i].votes + '</h4></div>');	
       				     }
       				     //$('body').append();
          				//alert(data.length); 
@@ -103,17 +103,30 @@
 	})();
 	
 </script>
-
-<div style="float:left;" id="player"></div>
-<div class="songs">
-<% @songs.each do |song| %>
-<% if @songs.first==song %>
-<h1 class="first"><%=  song.title+" "+song.artist+" "+song.album+" "+song.votes.to_s %></h1>
-<% else %>
-<h1 class="delete" ><%=  song.title+" "+song.artist+" "+song.album+" "+song.votes.to_s %></h1><button class="delete" onclick="sort('<%= song.id %>')">vote</button>
-
-<% end %>
-<%end%>
+<div style="padding-top:6%;" class="container">
+	<div class="row">
+    	<div class="col-md-7">
+      		<div id="player"></div>
+      		<div class="song"><h1 class="first"><%=  @songs.first.title+" "+@songs.first.artist+" "%></h1></div>
+    	</div>
+    	<div class="songs col-md-5">
+    		<div class="container">
+      			<% @songs.each do |song| %>
+      			<% if @songs.first!=song %>
+      			<div class="delete_body row">
+      				<div style="float: left;" class="col-md-5">	
+      					<h4 class="delete" ><%=  song.title+" "+song.artist+" " %></h4>
+      				</div>
+      				<div class="col-md-6">
+      					<button class="btn btn-primary btn-lg delete" onclick="sort('<%= song.id %>')">Vote <span class="glyphicon glyphicon-thumbs-up"></span></button><h4 style="padding-left: 5%;" class="delete">Votes: <%=song.votes.to_s %></h4>	
+      				</div>
+      			</div>
+      		
+      <% end %>
+      <%end%>
+      </div>
+    	</div>
+  	</div>
 </div>
 
 <!-- <iframe id="ytplayer" type="text/html" width="640" height="360" src="http://www.youtube.com/v/<%= @songs[0].youtube_id%>?version=3&enablejsapi=1" frameborder='0' allowfullscreen ></iframe> -->
