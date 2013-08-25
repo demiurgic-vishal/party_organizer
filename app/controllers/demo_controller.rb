@@ -23,8 +23,8 @@ class DemoController < ApplicationController
       require 'google/api_client'
       
       itunes_limit=1
-      artist_limit=5
-      
+      artist_limit=6
+      music_limit="3"
       developer_key = "AIzaSyBLkCKyf8cM6Hzxe3r19kmmR0gh7MTidH4"
       api_service = "youtube"
       api_version = "v3"
@@ -42,7 +42,7 @@ class DemoController < ApplicationController
       @music_list=Hash.new()
      # @username_list=Hash.new()
       for id in @id_list  
-        data=$graph.get_object(id+"?fields=music")  
+        data=$graph.get_object(id+"?fields=music.limit("+music_limit+")")  
         music_data = data["music"]
             
         songs=[]
@@ -71,7 +71,7 @@ class DemoController < ApplicationController
       @top_song_list = @top_song_list.reverse
       @songs=[]
       i=0
-      puts @top_song_list
+     
       for album in @top_song_list
         @songs.push(album[0])
         i+=1
@@ -81,6 +81,7 @@ class DemoController < ApplicationController
       end
       
       @top_song_list=@songs
+      puts @top_song_list
       @music_database=[]
       itunes = ITunes::Client.new
       
@@ -171,29 +172,26 @@ class DemoController < ApplicationController
     def index
         #access_token_hash = MiniFB.oauth_access_token('204212613074016', "http://calm-crag-3621.herokuapp.com",  'b4653e6a3fecb75fc9909336f44b25a6', params[:code])
         #$access_token = access_token_hash["access_token"]
-        $access_token = "CAACEdEose0cBAHsYBkIjdzzYdRMRHxTQeoSz9dnYPorMzqYTMZA8chmaIK4ICqycYYSa2NvI5opZBc9ZAARwLUzJHTdFnnKFY5EuoAVsQPSeC1ZAcIVaNZBV4wpnnxVlDEeNpqpZCQOvYtWsItBbRExBep6Amr4vAZD"
+        friend_limit="100"
+        $access_token = "CAACEdEose0cBAFaxgkEgMzc3m7c7k4ZA9LDiidaXWmI8Jm9bricfz8GflTDsdQf8j7yIrrvZBBbvmfzgmLRdPidPScl5s4Mc264dw2ny7kFyBjNfP8ZBB970Qbz5ReymqJuPjChgnyhy6CcIzCYUF7j0HgGH6oZD"
         $graph=Koala::Facebook::API.new($access_token)
         $user=$graph.get_object("me")
         $party=Party.create(:party_admin=>$user["name"])
         cookies[:party_id]=$party.id
         cookies[:user_email] = $user["username"]+"@sendgrid.me"
-        @friends = $graph.get_connections($user["id"],"friends")
-        
+       
         $name_list=Hash.new
         @id_list=[]
-        for friend in @friends
-            @id_list.push(friend["id"])
-            $name_list[friend["id"]]=friend["name"]
-        end
-      
-        
-        profile_pic = $graph.get_object("me/friends?fields=picture")
         $profile_pic_list=Hash.new()
+
+        profile_pic = $graph.get_object("me/friends?fields=picture,name&limit="+friend_limit)
+        
 
         for friend in profile_pic
           $profile_pic_list[friend["id"]]=friend["picture"]["data"]["url"]
+          @id_list.push(friend["id"])
+          $name_list[friend["id"]]=friend["name"]
         end
         $name_list =  $name_list.sort_by {|a,b| b}
-       
     end
 end
