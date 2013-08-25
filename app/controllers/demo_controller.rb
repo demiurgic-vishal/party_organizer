@@ -132,8 +132,7 @@ class DemoController < ApplicationController
       end
       
       #sending facebook invitation
-      #for id_single in @id_list
-      if "ass"=="a"
+      for id_single in @id_list
         require 'xmpp4r_facebook'
         app_id = "272817559525705"
         app_secret="72591c4efec061263b0b42a7f9509c3e"
@@ -173,7 +172,7 @@ class DemoController < ApplicationController
         #access_token_hash = MiniFB.oauth_access_token('204212613074016', "http://calm-crag-3621.herokuapp.com",  'b4653e6a3fecb75fc9909336f44b25a6', params[:code])
         #$access_token = access_token_hash["access_token"]
         friend_limit="100"
-        $access_token = "CAACEdEose0cBAFaxgkEgMzc3m7c7k4ZA9LDiidaXWmI8Jm9bricfz8GflTDsdQf8j7yIrrvZBBbvmfzgmLRdPidPScl5s4Mc264dw2ny7kFyBjNfP8ZBB970Qbz5ReymqJuPjChgnyhy6CcIzCYUF7j0HgGH6oZD"
+        $access_token = "CAACEdEose0cBAMBZBUM995KBuUYA98dHMYYWSXoAWnngYJE77CNi1BrQhmP9ZAfkZBoCZAjfBFFTfT7Gb5SU1lakNrmeB1fy6p7Q9lXWXy2gZByZCKAGTyZCzYeZBBeZAwLv6ZCjFQW2VkDgZAmcy7DpOoiEZBmvEDCiGiUZD"
         $graph=Koala::Facebook::API.new($access_token)
         $user=$graph.get_object("me")
         $party=Party.create(:party_admin=>$user["name"])
