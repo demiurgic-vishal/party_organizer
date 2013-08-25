@@ -13,6 +13,7 @@ PartyOrganiser::Application.routes.draw do
   get 'song/sort'
   get 'song/repeated_render'
   get 'song/delete'
+  get 'song/list_sort'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

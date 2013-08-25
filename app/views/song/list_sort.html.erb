@@ -1,0 +1,59 @@
+
+<script type="text/javascript">
+    
+  
+    (function(){
+
+   
+
+
+   setInterval(function()
+   {
+   	
+   	$.ajax({
+      			url:"repeated_render",
+      			method:'get', 
+      			success:function(data) {
+      				     $('.delete_body').remove();
+      				     for(var i=0;i<data.length;i++)
+      				     {
+                    
+                    if(data[i].id!==id)
+      				     $('.songs').append('<div class="delete_body row"><div style="float:left;" class="col-md-5"><h4 class="delete">' + data[i].title +' '+data[i].artist +' '+data[i].album+' '+' </h4></div><div class="col-md-6"><button class="btn btn-primary btn-lg delete" onclick="sort(\'' + data[i].id +'\')">Vote <span class="glyphicon glyphicon-thumbs-up"></span></button><p style="padding-left:5%" class="delete">Votes: ' + data[i].votes + '</h4></div>');	
+      				     }
+      				     //$('body').append();
+         				//alert(data.length); 
+      					}
+   			});
+   	
+   
+   
+   },500);
+	})();
+	
+</script>
+<div style="padding-top:6%;" class="container">
+	<div class="row">
+    	<div class="col-md-7">
+      		<div id="player"></div>
+      		<div class="song"><h1 class="first"><%=  @songs.first.title+" "+@songs.first.artist+" "%></h1></div>
+    	</div>
+    	<div class="songs col-md-5">
+    		<div class="container">
+      			<% @songs.each do |song| %>
+      			<% if @songs.first!=song %>
+      			<div class="delete_body row">
+      				<div style="float: left;" class="col-md-5">	
+      					<h4 class="delete" ><%=  song.title+" "+song.artist+" " %></h4>
+      				</div>
+      				<div class="col-md-6">
+      					<button class="btn btn-primary btn-lg delete" onclick="sort('<%= song.id %>')">Vote <span class="glyphicon glyphicon-thumbs-up"></span></button><h4 style="padding-left: 5%;" class="delete">Votes: <%=song.votes.to_s %></h4>	
+      				</div>
+      			</div>
+      		
+      <% end %>
+      <%end%>
+      </div>
+    	</div>
+  	</div>
+</div>

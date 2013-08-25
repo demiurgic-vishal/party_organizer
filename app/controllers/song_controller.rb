@@ -6,7 +6,11 @@ class SongController < ApplicationController
 
     
   end
-
+  
+  def list_sort
+    $party_this=Party.find(params[:party_id])
+    @songs=$party_this.songs.order('votes DESC')
+  end
   def list
     $party_this=Party.find(params[:party_id])
     @songs=$party_this.songs.order('votes DESC')
