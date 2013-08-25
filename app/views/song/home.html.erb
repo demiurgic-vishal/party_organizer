@@ -1,4 +1,4 @@
-<div style="padding-top: 10%;" class="container"><%= cookies[:party_id] %>
+<div style="padding-top: 10%;" class="container">
 <%= form_tag(:action=> 'list_sort', :controller=>'song',:method=>'get') do %>
 
 <%= number_field_tag('party_id')  %>

@@ -1,8 +1,6 @@
 class SongController < ApplicationController
   def home
-   if cookies[:party_id]
-      redirect_to :action => 'list_sort', :party_id => cookies[:party_id] 
-    end
+  
 
     
   end
