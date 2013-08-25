@@ -21,7 +21,7 @@ class DemoController < ApplicationController
     
     def main
       require 'google/api_client'
-      require 'trollop'
+      
       itunes_limit=2
       artist_limit=5
       
@@ -102,7 +102,7 @@ class DemoController < ApplicationController
           end
            
           opts = Trollop::options do
-            opt :q, 'Search term', :type => String, :default => "#{music["title"]}  #{music["album"]} #{music["artist"]}"
+            opt :q, 'Search term', :type => String, :default => "#{music["title"]} #{music["artist"]}"
             opt :maxResults, 'Max results', :type => :int, :default => 1
           end
 
