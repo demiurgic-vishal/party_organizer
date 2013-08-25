@@ -22,7 +22,7 @@ class DemoController < ApplicationController
     def main
       require 'google/api_client'
       
-      itunes_limit=2
+      itunes_limit=1
       artist_limit=5
       
       developer_key = "AIzaSyBLkCKyf8cM6Hzxe3r19kmmR0gh7MTidH4"
@@ -171,7 +171,7 @@ class DemoController < ApplicationController
     def index
         #access_token_hash = MiniFB.oauth_access_token('204212613074016', "http://calm-crag-3621.herokuapp.com",  'b4653e6a3fecb75fc9909336f44b25a6', params[:code])
         #$access_token = access_token_hash["access_token"]
-        $access_token = "CAACEdEose0cBABevdi0aZA4bDbG4JtbrxajZBNNZAeUX7PeOoOPROPNoFDeAzOSJTrvFCqF3ze0PRxaZA3AKFJ2PmtxMm2YOxXvugZA8pWW3ACivtXa8QjRplVX2GbLjrZB9pj4QXN9F0X0qxdwnGempE5ZBPVdU9wZD"
+        $access_token = "CAACEdEose0cBAHsYBkIjdzzYdRMRHxTQeoSz9dnYPorMzqYTMZA8chmaIK4ICqycYYSa2NvI5opZBc9ZAARwLUzJHTdFnnKFY5EuoAVsQPSeC1ZAcIVaNZBV4wpnnxVlDEeNpqpZCQOvYtWsItBbRExBep6Amr4vAZD"
         $graph=Koala::Facebook::API.new($access_token)
         $user=$graph.get_object("me")
         $party=Party.create(:party_admin=>$user["name"])
