@@ -21,6 +21,7 @@ class DemoController < ApplicationController
     
     def main
       require 'google/api_client'
+      require 'trollop'
       itunes_limit=2
       artist_limit=5
       
