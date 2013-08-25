@@ -17,8 +17,8 @@
       				     $('.delete_body').remove();
       				     for(var i=0;i<data.length;i++)
       				     {
-                    
-                    if(data[i].id!==id)
+                    //alert(String(data[i].currently_playing));
+                    if(data[i].currently_playing!==true)
       				     $('.songs').append('<div class="delete_body row"><div style="float:left;" class="col-md-5"><h4 class="delete">' + data[i].title +' '+data[i].artist +' '+data[i].album+' '+' </h4></div><div class="col-md-6"><button class="btn btn-primary btn-lg delete" onclick="sort(\'' + data[i].id +'\')">Vote <span class="glyphicon glyphicon-thumbs-up"></span></button><p style="padding-left:5%" class="delete">Votes: ' + data[i].votes + '</h4></div>');	
       				     }
       				     //$('body').append();

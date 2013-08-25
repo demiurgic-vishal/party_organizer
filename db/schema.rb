@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130824134020) do
+ActiveRecord::Schema.define(version: 20130825020415) do
 
   create_table "parties", force: true do |t|
     t.string   "party_admin"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20130824134020) do
     t.string   "album"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "currently_playing", default: false
   end
 
 end
