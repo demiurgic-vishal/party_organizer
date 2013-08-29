@@ -173,7 +173,7 @@ class DemoController < ApplicationController
         #access_token_hash = MiniFB.oauth_access_token('204212613074016', "http://calm-crag-3621.herokuapp.com",  'b4653e6a3fecb75fc9909336f44b25a6', params[:code])
         #$access_token = access_token_hash["access_token"]
         friend_limit="100"
-        $access_token = "CAACEdEose0cBANIDCX5XfcjuKYbxfq6KYSe0zmAsBCvTOLoBZCWGQFH60gIywHrYeyozepWvS0zsGmS8ukLDOZCVdMPwT0HvzVDaVGsezGiRRfeI6DtSecLAl88TG9MS00qpFYYd3X3LUZBGFZAOctItUXnl9ZA4ZD"
+        $access_token = "CAACEdEose0cBAO5qPduk3qP9Wz4rQVgJwi7FETyxitrGzmmtbbUp3UroCpqkpDmhqpzFW3yditgaG6k5nicXyHMa9LdgZCuhtZAP7YLTsUsfezE50FGxGGU0A0cmOaW8em5lF2ekLruNhjGNMGpzHZACv6CRWMZD"
         $graph=Koala::Facebook::API.new($access_token)
         $user=$graph.get_object("me")
         $party=Party.create(:party_admin=>$user["name"])
