@@ -22,9 +22,9 @@ class DemoController < ApplicationController
     def main
       require 'google/api_client'
       
-      itunes_limit=1
-      artist_limit=4
-      music_limit="3"
+      itunes_limit=2
+      artist_limit=5
+      music_limit="10"
       developer_key = "AIzaSyBLkCKyf8cM6Hzxe3r19kmmR0gh7MTidH4"
       api_service = "youtube"
       api_version = "v3"
@@ -170,10 +170,10 @@ class DemoController < ApplicationController
       
     end
     def index
-        #access_token_hash = MiniFB.oauth_access_token('204212613074016', "http://calm-crag-3621.herokuapp.com",  'b4653e6a3fecb75fc9909336f44b25a6', params[:code])
-        #$access_token = access_token_hash["access_token"]
-        friend_limit="100"
-        $access_token = "CAACEdEose0cBAO5qPduk3qP9Wz4rQVgJwi7FETyxitrGzmmtbbUp3UroCpqkpDmhqpzFW3yditgaG6k5nicXyHMa9LdgZCuhtZAP7YLTsUsfezE50FGxGGU0A0cmOaW8em5lF2ekLruNhjGNMGpzHZACv6CRWMZD"
+        access_token_hash = MiniFB.oauth_access_token('204212613074016', "http://calm-crag-3621.herokuapp.com",  'b4653e6a3fecb75fc9909336f44b25a6', params[:code])
+        $access_token = access_token_hash["access_token"]
+        friend_limit="1000"
+        #$access_token = "CAACEdEose0cBAN2tqUg1hLzZBlen95RpykuoiCf8wLpnWXzsTqjVcs9TZAjfYWlBQphye3TeodJ3ZBwTCugaerdm6ZAr5EhQ9bHGS8W9k918zkoFceWGmrBaaI1vdiZChqxEKRRZABuFrZB7QiLAZCfWzfAKZA3QaHKl41PcHMBuZCHZAuBPnkN4OvoTLvfJPp1BQAZD"
         $graph=Koala::Facebook::API.new($access_token)
         $user=$graph.get_object("me")
         $party=Party.create(:party_admin=>$user["name"])
