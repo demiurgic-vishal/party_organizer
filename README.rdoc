@@ -1,28 +1,17 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app basically aims at making a playlist that will satisfy a group of people using their facebook likes and music charts, it also gives user the ability to create dynamic playlist(guests can change the order of the songs on the server using their phones).
 
-Things you may want to cover:
+dependencies =>
+Rails version 4.0.0
+Itunes gem 
+mini_fb gem
+httparty gem
+koala gem
+google api client gem 
+xmpp4r_facebook gem
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+for any other info contact me at vishalt.tomar@gmail.com
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
